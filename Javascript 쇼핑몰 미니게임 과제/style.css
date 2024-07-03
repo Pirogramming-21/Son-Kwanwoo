@@ -41,7 +41,7 @@ body {
   transform: scale(1.1);
 }
 
-.button_container {
+.buttons {
   display: flex;
   flex-direction: row;
   align-items: center;

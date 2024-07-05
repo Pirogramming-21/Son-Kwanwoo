@@ -85,18 +85,19 @@ button:disabled {
 }
 
 .records_top h2 {
-    flex: 9.2;
-    margin: 0;
+    flex: 8;
+    margin: 0 20px;
     font-size: 24px;
     text-align: center;
 }
 
-#deleteAllBtn {
-    flex: 0.8;
+#selectAllBtn, #deleteBtn {
+    flex: 1;
     padding: 5px;
     font-size: 20px;
     text-align: right;
     background-color: transparent;
+    margin: 0 10px;
 }
 
 .records ul {
@@ -109,6 +110,7 @@ button:disabled {
     display: flex;
     justify-content: space-between;
     align-items: center;
+
     width: 90%;
     margin: 0 auto;
     padding: 5px 0;
@@ -116,20 +118,15 @@ button:disabled {
     border-bottom: 1px solid #e0e0e0;
 }
 
+.records li input[type='checkbox'] {
+    margin: 0 10px;
+}
+
 .records li span {
-    flex-grow: 9;
-    text-align: center;
     font-size: 15px;
+    margin: 0 10px;
 }
 
 .records li:last-child {
     border-bottom: none;
-}
-
-.records li button {
-    flex-grow: 1;
-    padding: 5px;
-    font-size: 15px;
-    background-color: transparent;
-    margin-left: auto;
 }

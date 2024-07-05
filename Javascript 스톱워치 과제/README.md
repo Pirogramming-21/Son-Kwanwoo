@@ -1,11 +1,11 @@
 # 🍀피로그래밍 스톱워치🍀
-
+<br>
 ![Alt text](./images.jpg)
 
 ### (0) 디자인적 요소 추가
 
 ### (1) 스톱워치 기능
-a. 초(second): 밀리초(millisecond)
+a. 초(second): 밀리초(millisecond) <br>
 b. 시작(start), 정지(그만), 재설정(reset) 버튼 및 기능 구현
 
 ### (2) 기록 추가

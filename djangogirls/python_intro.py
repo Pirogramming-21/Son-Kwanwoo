@@ -1,25 +1,25 @@
 print("Hello, Django girls!")
 
 print("\n")
-#If...elif...else
+# If...elif...else
 if 3 > 2:
     print("It works!")
 
 print("\n")
-#조건이 참(True)이 아니라면 어떻게 되나요?
+# 조건이 참(True)이 아니라면 어떻게 되나요?
 if 5 > 2:
     print("5 is indeed grater than 2")
 else:
     print("5 is not greater than 2")
 
 print("\n")
-name = 'Sonja'
-if name == 'Ola':
-    print('Hey Ola!')
-elif name == 'Sonja':
-    print('Hey Sonja!')
+name = "Sonja"
+if name == "Ola":
+    print("Hey Ola!")
+elif name == "Sonja":
+    print("Hey Sonja!")
 else:
-    print('Hey anonymous!')
+    print("Hey anonymous!")
 
 print("\n")
 volume = 57
@@ -37,51 +37,62 @@ else:
     print("My ears are hurting! :(")
 
 print("\n")
-#주석(Comments)
+# 주석(Comments)
 # volume 값을 바꿔보세요
 if volume < 20 or volume > 80:
     volume = 50
     print("That's better!")
-    
+
 print("\n")
-#나만의 함수 만들기!
+
+
+# 나만의 함수 만들기!
 def hi():
-    print('Hi there!')
-    print('How are you?')
+    print("Hi there!")
+    print("How are you?")
+
 
 hi()
 
 print("\n")
+
+
 def hi(name):
-    if name == 'Ola':
-        print('Hi Ola!')
-    elif name == 'Sonja':
-        print('Hi Sonja!')
+    if name == "Ola":
+        print("Hi Ola!")
+    elif name == "Sonja":
+        print("Hi Sonja!")
     else:
-        print('Hi anonymous!')
+        print("Hi anonymous!")
+
 
 hi("Ola")
 hi("Sonja")
 hi("333")
 
 print("\n")
+
+
 def hi(name):
-    print('Hi ' + name + '!')
+    print("Hi " + name + "!")
+
 
 hi("Rachel")
 
 print("\n")
-#반복하기
+# 반복하기
 # girls = ['Rachel', 'Monica', 'Phoebe', 'Ola', 'You']
 
-def hi(name):
-    print('Hi ' + name + '!')
 
-girls = ['Rachel', 'Monica', 'Phoebe', 'Ola', 'You']
+def hi(name):
+    print("Hi " + name + "!")
+
+
+girls = ["Rachel", "Monica", "Phoebe", "Ola", "You"]
 for name in girls:
     hi(name)
-    print('Next girl')
-    
+    print("Next girl")
+
 print("\n")
 for i in range(1, 6):
     print(i)

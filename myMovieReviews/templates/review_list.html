@@ -1,9 +1,11 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {% load static %}
     <link rel="stylesheet" href="{% static 'css/common.css' %}">
     <link rel="stylesheet" href="{% static 'css/review_list.css' %}">
     <title>myMovieReviews</title>
@@ -14,19 +16,26 @@
         <h1><a href="/reviews/">myMovieReviews🍿</a></h1>
         <a href="/reviews/create/">Add a New Review</a>
     </header>
-    
+
     {% if reviews %}
         <div class="review_container">
-            <ul>
-                {% for review in reviews %}
-                    <li>
-                        <h2><a href="/reviews/{{ review.id }}/">{{ review.title }}</a></h2>
-                        <p><strong>Year:</strong> {{ review.year }}</p>
-                        <p><strong>Genre:</strong> {{ review.genre }}</p>
-                        <p><strong>Rank:</strong> {{ review.rank }}</p>
-                    </li>
-                {% endfor %}
-            </ul>
+            {% for review in reviews %}
+            <div class="review_item">
+                <div class="image_box">
+                    {% if review.image %}
+                    <img src="{{ review.image.url }}" alt="{{ review.title }}">
+                    {% else %}
+                    <img src="{% static 'images/default_image.jpg' %}" alt="Default Image">
+                    {% endif %}
+
+                </div>
+
+                <h2><a href="/reviews/{{ review.id }}/">{{ review.title }}</a></h2>
+                <p><strong>Year:</strong> {{ review.year }}</p>
+                <p><strong>Genre:</strong> {{ review.genre }}</p>
+                <p><strong>Rank:</strong> {{ review.rank }}</p>
+            </div>
+            {% endfor %}
         </div>
     {% else %}
         <p>No reviews available.</p>

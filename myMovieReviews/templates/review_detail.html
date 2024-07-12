@@ -1,9 +1,11 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {% load static %}
     <link rel="stylesheet" href="{% static 'css/common.css' %}">
     <link rel="stylesheet" href="{% static 'css/review_detail.css' %}">
     <title>Review Detail</title>
@@ -16,24 +18,46 @@
     </header>
 
     <div class="review-container">
+
         <div class="nav-button prev">
             {% if previous_post_id %}
-                <a href="/reviews/{{previous_post_id}}/"><strong> < </strong></a>
+            <a href="/reviews/{{previous_post_id}}/"><strong>
+                    < </strong></a>
             {% else %}
-                <span><strong> < </strong></span>
+            <span><strong>
+                    < </strong></span>
             {% endif %}
         </div>
+
         <div class="review-box">
             <h1>{{ review.title }}</h1>
-            <div class="review-info">
-                <p><strong>개봉년도:</strong> {{ review.year }}</p>
-                <p><strong>감독:</strong> {{ review.director }}</p>
-                <p><strong>주연:</strong> {{ review.actor }}</p>
-                <p><strong>장르:</strong> {{ review.genre }}</p>
-                <p><strong>별점:</strong> {{ review.rank }}</p>
-                <p><strong>러닝타임:</strong> {{ review.running_time_hours }}H {{ review.running_time_minutes }}M</p>
-                <p><strong>리뷰:</strong> {{ review.content }}</p>
+
+            <div class="review-content">
+                <div class="image_box">
+                    {% if review.image %}
+                    <img src="{{ review.image.url }}" alt="{{ review.title }}">
+                    {% else %}
+                    <img src="{% static 'images/default_image.jpg' %}" alt="Default Image">
+                    {% endif %}
+                </div>
+            
+
+                <div class="review-details">
+                    <div class="review-info">
+                        <p><strong>개봉년도:</strong> {{ review.year }}</p>
+                        <p><strong>감독:</strong> {{ review.director }}</p>
+                        <p><strong>주연:</strong> {{ review.actor }}</p>
+                        <p><strong>장르:</strong> {{ review.genre }}</p>
+                        <p><strong>별점:</strong> {{ review.rank }}</p>
+                        <p><strong>러닝타임:</strong> {{ review.running_time_hours }}H {{ review.running_time_minutes }}M</p>
+                    </div>
+                </div>
             </div>
+
+            <div class="review-comment">
+                <p>{{ review.content }}</p>
+            </div>
+
             <div class="review-actions">
                 <a href="/reviews/{{review.id}}/update/" class="edit-btn">Edit</a>
                 <form action="/reviews/{{review.id}}/delete/" method="post">
@@ -42,11 +66,12 @@
                 </form>
             </div>
         </div>
+
         <div class="nav-button next">
             {% if next_post_id %}
-                <a href="/reviews/{{next_post_id }}/"><strong> > </strong></a>
+            <a href="/reviews/{{next_post_id }}/"><strong> > </strong></a>
             {% else %}
-                <span><strong> > </strong></span>
+            <span><strong> > </strong></span>
             {% endif %}
         </div>
     </div>

@@ -25,6 +25,7 @@ def review_create(request):
             actor=request.POST["actor"],
             running_time=request.POST["running_time"],
             content=request.POST["content"],
+            image=request.FILES.get("image")  # 이미지 처리
         )
         return redirect("/reviews/")
     return render(request, "review_create.html", {"genre_choices": genre_choices})
@@ -64,6 +65,10 @@ def review_update(request, pk):
         review.actor=request.POST["actor"]
         review.running_time=request.POST["running_time"]
         review.content=request.POST["content"]
+        
+        # 이미지 처리
+        if request.FILES.get("image"):
+            review.image = request.FILES["image"]
         
         review.save()
         return redirect(f"/reviews/{pk}")

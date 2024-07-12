@@ -1,9 +1,10 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {% load static %}
     <link rel="stylesheet" href="{% static 'css/common.css' %}">
     <link rel="stylesheet" href="{% static 'css/review_create.css' %}">
     <title>Create Review</title>
@@ -17,8 +18,13 @@
 
     <div class="create_box">
         <h1>MovieReview🍿</h1>
-        <form action="/reviews/create/" method="post">
+        <form action="/reviews/create/" method="post" enctype="multipart/form-data">
             {% csrf_token %}
+            <div class="form-group">
+                <label for="image">이미지:</label>
+                <input type="file" id="image" name="image">
+            </div>
+
             <div class="form-group">
                 <label for="title">제목:</label>
                 <input type="text" id="title" name="title" required>

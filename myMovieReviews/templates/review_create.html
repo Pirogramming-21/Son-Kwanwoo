@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/common.css' %}">
+    <link rel="stylesheet" href="{% static 'css/review_create.css' %}">
+    <title>Create Review</title>
+</head>
+
+<body>
+    <header>
+        <h1><a href="/reviews/">myMovieReviews</a></h1>
+        <a href="/reviews/create/">Add a New Review</a>
+    </header>
+
+    <h1>MovieReview🍿</h1>
+    <form action="/reviews/create/" method="post">
+        {% csrf_token %}
+        <label for="title">제목:</label>
+        <input type="text" id="title" name="title" required><br>
+        
+        <label for="year">개봉년도:</label>
+        <input type="number" id="year" name="year" required><br>
+        
+        <label for="director">감독:</label>
+        <input type="text" id="director" name="director" required><br>
+        
+        <label for="actor">주연:</label>
+        <input type="text" id="actor" name="actor" required><br>
+        
+        <label for="genre">장르:</label>
+        <select id="genre" name="genre" required>
+            {% for key, value in genre_choices %}
+                <option value="{{ key }}">{{ value }}</option>
+            {% endfor %}
+        </select><br>
+
+        <label for="running_time">러닝타임:</label>
+        <input type="number" id="running_time" name="running_time" required><br>
+        
+        <label for="content">리뷰:</label>
+        <textarea id="content" name="content" required></textarea><br>
+        
+        <label for="rank">별점:</label>
+        <input type="number" id="rank" name="rank" required><br>
+
+        <button type="submit">Save</button>
+    </form>
+</body>
+
+</html>

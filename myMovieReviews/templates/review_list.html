@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/common.css' %}">
+    <link rel="stylesheet" href="{% static 'css/review_list.css' %}">
+    <title>myMovieReviews</title>
+</head>
+
+<body>
+    <header>
+        <h1><a href="/reviews/">myMovieReviews</a></h1>
+        <a href="/reviews/create/">Add a New Review</a>
+    </header>
+    
+    {% if reviews %}
+        <ul>
+            {% for review in reviews %}
+                <li>
+                    <h2><a href="/reviews/{{ review.id }}/">{{ review.title }}</a></h2>
+                    <p><strong>Year:</strong> {{ review.year }}</p>
+                    <p><strong>Genre:</strong> {{ review.genre }}</p>
+                    <p><strong>Rank:</strong> {{ review.rank }}</p>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No reviews available.</p>
+    {% endif %}
+</body>
+
+</html>

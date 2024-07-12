@@ -35,8 +35,20 @@ def review_detail(request, pk):
     review.running_time_hours = review.running_time // 60
     review.running_time_minutes = review.running_time % 60
     
+    try:
+        previous_id = Reviews.objects.filter(id__lt=pk).order_by("-id")[0].pk
+    except IndexError:
+        previous_id = None
+    
+    try:
+        next_id = Reviews.objects.filter(id__gt=pk).order_by("id")[0].pk
+    except IndexError:
+        next_id = None
+    
     context={
-        "review":review
+        "review":review,
+        "previous_post_id":previous_id,
+        "next_post_id":next_id,
     }
     return render(request,'review_detail.html', context)
 

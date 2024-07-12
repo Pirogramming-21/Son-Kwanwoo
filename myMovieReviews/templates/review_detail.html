@@ -11,29 +11,43 @@
 
 <body>
     <header>
-        <h1><a href="/reviews/">myMovieReviews</a></h1>
+        <h1><a href="/reviews/">myMovieReviews🍿</a></h1>
         <a href="/reviews/create/">Add a New Review</a>
     </header>
 
-    <div class="review-box">
-        <h1>{{ review.title }}</h1>
-
-        <div class="review-info">
-            <p><strong>개봉년도:</strong> {{ review.year }}</p>
-            <p><strong>감독:</strong> {{ review.director }}</p>
-            <p><strong>주연:</strong> {{ review.actor }}</p>
-            <p><strong>장르:</strong> {{ review.genre }}</p>
-            <p><strong>별점:</strong> {{ review.rank }}</p>
-            <p><strong>러닝타임:</strong> {{ review.running_time_hours }}H {{ review.running_time_minutes }}M</p>
-            <p><strong>리뷰:</strong> {{ review.content }}</p>
+    <div class="review-container">
+        <div class="nav-button prev">
+            {% if previous_post_id %}
+                <a href="/reviews/{{previous_post_id}}/"><strong> < </strong></a>
+            {% else %}
+                <span><strong> < </strong></span>
+            {% endif %}
         </div>
-
-        <div class="review-actions">
-            <a href="/reviews/{{review.id}}/update/" class="edit-btn">수정하기</a>
-            <form action="/reviews/{{review.id}}/delete/" method="post">
-                {% csrf_token %}
-                <input type="submit" value="삭제하기" class="delete-btn">
-            </form>
+        <div class="review-box">
+            <h1>{{ review.title }}</h1>
+            <div class="review-info">
+                <p><strong>개봉년도:</strong> {{ review.year }}</p>
+                <p><strong>감독:</strong> {{ review.director }}</p>
+                <p><strong>주연:</strong> {{ review.actor }}</p>
+                <p><strong>장르:</strong> {{ review.genre }}</p>
+                <p><strong>별점:</strong> {{ review.rank }}</p>
+                <p><strong>러닝타임:</strong> {{ review.running_time_hours }}H {{ review.running_time_minutes }}M</p>
+                <p><strong>리뷰:</strong> {{ review.content }}</p>
+            </div>
+            <div class="review-actions">
+                <a href="/reviews/{{review.id}}/update/" class="edit-btn">Edit</a>
+                <form action="/reviews/{{review.id}}/delete/" method="post">
+                    {% csrf_token %}
+                    <input type="submit" value="Delete" class="delete-btn">
+                </form>
+            </div>
+        </div>
+        <div class="nav-button next">
+            {% if next_post_id %}
+                <a href="/reviews/{{next_post_id }}/"><strong> > </strong></a>
+            {% else %}
+                <span><strong> > </strong></span>
+            {% endif %}
         </div>
     </div>
 </body>

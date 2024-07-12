@@ -1,50 +1,81 @@
-.review-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 30px;
-}
-
-.review-card {
+/* Existing styles */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     background-color: #fff;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 10px 20px;
 }
 
-.review-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-}
-
-.review-card-header {
-    background-color: #3498db;
-    color: #fff;
-    padding: 15px;
-}
-
-.review-card-title {
-    font-size: 1.2em;
+h1 {
+    font-size: 2.5em;
+    color: #2c3e50;
     margin: 0;
 }
 
-.review-card-body {
+a {
+    color: #3498db;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #2980b9;
+}
+
+/* New and modified styles */
+.review_container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Center items */
     padding: 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+    max-width: 1200px; /* Maximum width to fit content */
+    margin-left: auto;
+    margin-right: auto;
+    background: none; /* Remove any additional background */
 }
 
-.review-card-info {
+.review_container ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Gap between items */
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    justify-content: center; /* Center items within ul */
+}
+
+.review_container li {
+    flex: 1 1 calc(22% - 20px); /* Four items per row, with gap */
+    box-sizing: border-box;
+    background-color: #f9f9f9;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    max-width: calc(22% - 20px); /* Ensure max width for better layout */
+}
+
+.review_container li:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.review_container h2 {
+    font-size: 2em; /* Larger font size */
+    color: #2c3e50;
     margin-bottom: 10px;
+}
+
+.review_container p {
+    margin: 10px 0; /* Increase margin for better spacing */
     color: #7f8c8d;
 }
 
-.review-card-rank {
-    font-size: 1.2em;
-    color: #f39c12;
-    font-weight: bold;
-}
-
-.no-reviews {
-    text-align: center;
-    color: #7f8c8d;
-    font-style: italic;
+.review_container p strong {
+    color: #2c3e50;
 }

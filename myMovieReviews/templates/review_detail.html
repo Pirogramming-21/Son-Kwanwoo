@@ -15,22 +15,27 @@
         <a href="/reviews/create/">Add a New Review</a>
     </header>
 
-    <h1>{{ review.title }}</h1>
+    <div class="review-box">
+        <h1>{{ review.title }}</h1>
 
-    <a href="/reviews/{{review.id}}/update/"> 수정하기 </a>
+        <div class="review-info">
+            <p><strong>개봉년도:</strong> {{ review.year }}</p>
+            <p><strong>감독:</strong> {{ review.director }}</p>
+            <p><strong>주연:</strong> {{ review.actor }}</p>
+            <p><strong>장르:</strong> {{ review.genre }}</p>
+            <p><strong>별점:</strong> {{ review.rank }}</p>
+            <p><strong>러닝타임:</strong> {{ review.running_time_hours }}H {{ review.running_time_minutes }}M</p>
+            <p><strong>리뷰:</strong> {{ review.content }}</p>
+        </div>
 
-    <form action="/reviews/{{review.id}}/delete/" method="post">
-        {% csrf_token %}
-        <input type="submit" value="삭제하기">
-    </form>
-
-    <p><strong>개봉년도:</strong> {{ review.year }}</p>
-    <p><strong>감독:</strong> {{ review.director }}</p>
-    <p><strong>주연:</strong> {{ review.actor }}</p>
-    <p><strong>장르:</strong> {{ review.genre }}</p>
-    <p><strong>별점:</strong> {{ review.rank }}</p>
-    <p><strong>러닝타임:</strong> {{ review.running_time_hours }}H {{ review.running_time_minutes }}M</p>
-    <p><strong>리뷰:</strong> {{ review.content }}</p>
+        <div class="review-actions">
+            <a href="/reviews/{{review.id}}/update/" class="edit-btn">수정하기</a>
+            <form action="/reviews/{{review.id}}/delete/" method="post">
+                {% csrf_token %}
+                <input type="submit" value="삭제하기" class="delete-btn">
+            </form>
+        </div>
+    </div>
 </body>
 
 </html>

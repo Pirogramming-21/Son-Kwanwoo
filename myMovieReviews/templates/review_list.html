@@ -11,21 +11,23 @@
 
 <body>
     <header>
-        <h1><a href="/reviews/">myMovieReviews</a></h1>
+        <h1><a href="/reviews/">myMovieReviews🍿</a></h1>
         <a href="/reviews/create/">Add a New Review</a>
     </header>
     
     {% if reviews %}
-        <ul>
-            {% for review in reviews %}
-                <li>
-                    <h2><a href="/reviews/{{ review.id }}/">{{ review.title }}</a></h2>
-                    <p><strong>Year:</strong> {{ review.year }}</p>
-                    <p><strong>Genre:</strong> {{ review.genre }}</p>
-                    <p><strong>Rank:</strong> {{ review.rank }}</p>
-                </li>
-            {% endfor %}
-        </ul>
+        <div class="review_container">
+            <ul>
+                {% for review in reviews %}
+                    <li>
+                        <h2><a href="/reviews/{{ review.id }}/">{{ review.title }}</a></h2>
+                        <p><strong>Year:</strong> {{ review.year }}</p>
+                        <p><strong>Genre:</strong> {{ review.genre }}</p>
+                        <p><strong>Rank:</strong> {{ review.rank }}</p>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
     {% else %}
         <p>No reviews available.</p>
     {% endif %}

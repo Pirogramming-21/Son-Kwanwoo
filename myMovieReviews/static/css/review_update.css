@@ -1,28 +1,113 @@
-/* 이 파일은 review_create.css와 거의 동일하므로, 약간의 수정만 합니다 */
+/* 기존 스타일 */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 10px 20px;
+    margin-bottom: 15px; /* 헤더와 박스 사이 간격 추가 */
+}
 
-.update-form {
+h1 {
+    font-size: 2.5em;
+    color: #2c3e50;
+    margin: 0;
+}
+
+a {
+    color: #3498db;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #2980b9;
+}
+
+/* 새로운 스타일 */
+.update_box {
+    width: 60%; /* 부모 컨테이너의 60% 너비 */
+    margin: 0 auto; /* 가운데 정렬 */
+    background-color: #f9f9f9; /* 리뷰 페이지와 어울리는 배경색 */
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-top: 50px; /* 헤더와의 간격 조정 */
+}
+
+.update_box h1 {
+    font-size: 1.5em; /* 작은 폰트 사이즈 */
+    color: #2c3e50;
+    margin-bottom: 10px;
+    border-bottom: 2px solid #ddd; /* 밑줄 */
+    padding-bottom: 10px;
+    text-align: center; /* 가운데 정렬 */
+}
+
+form {
     background-color: #fff;
     padding: 30px;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
-.update-title {
-    font-size: 1.5em;
-    color: #2c3e50;
+.form-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.form-group label {
+    flex: 1;
+    margin-bottom: 0; /* 아래 마진 제거 */
+    color: #555;
+}
+
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group textarea,
+.form-group select {
+    flex: 3;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+form textarea {
+    height: 150px;
+}
+
+.genre-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
     margin-bottom: 20px;
 }
 
-.update-btn {
-    background-color: #e67e22;
+.genre-option {
+    background-color: #e0e0e0;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 0.9em;
+}
+
+.save-btn {
+    background-color: #27ae60;
     color: #fff;
     border: none;
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    margin-left: auto; /* 버튼을 오른쪽으로 */
+    display: block;
+    width: fit-content; /* 버튼 길이 조정 */
 }
 
-.update-btn:hover {
-    background-color: #d35400;
+.save-btn:hover {
+    background-color: #2ecc71;
 }

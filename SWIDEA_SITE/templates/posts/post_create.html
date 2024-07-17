@@ -1,0 +1,40 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="{% static 'css//posts/post_create.css' %}">
+    <title>Create Post</title>
+</head>
+
+<body>
+    <div class="header">
+        <h1 class="site-title"><a href="{% url 'posts:main' %}">Post List</a></h1>
+    
+        <div class="header-right">
+            <div class="search-bar">
+                <input type="text" placeholder="Search">
+            </div>
+    
+            <div class="action-buttons">
+                <a href="{% url 'posts:create' %}">Create New Post</a>
+                <a href="{% url 'tools:create' %}">Create New Tool</a>
+                <a href="{% url 'tools:list' %}">View Tool List</a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container">
+        <h1>Create Post</h1>
+
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div class="button-group">
+                <button type="submit">Save</button>
+                <a href="{% url 'posts:main' %}">Cancel</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

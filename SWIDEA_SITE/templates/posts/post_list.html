@@ -1,0 +1,104 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="{% static 'css/posts/post_list.css' %}">
+    <title>Post List</title>
+</head>
+<body>
+    <div class="header">
+        <h1 class="site-title"><a href="{% url 'posts:main' %}">My SW Idea Manage💻</a></h1>
+    
+        <div class="header-right">
+            <div class="search-bar">
+                <input type="text" placeholder="Search">
+            </div>
+    
+            <div class="action-buttons">
+                <a href="{% url 'posts:create' %}">Idea Register</a>
+                <a href="{% url 'tools:create' %}">DevTool Register</a>
+                <a href="{% url 'tools:list' %}">DevTool List</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-list">
+        {% for post in posts %}
+            <div class="post-item" data-post-id="{{ post.id }}">
+                {% if post.image %}
+                    <img src="{{ post.image.url }}" alt="{{ post.title }}">
+                {% endif %}
+                <h3><a href="{% url 'posts:detail' post.pk %}">{{ post.title }}</a></h3>
+                <p>Tool: {{ post.tool.name }}</p>
+                <p>Interest: <span class="interest-value">{{ post.interest }}</span></p>
+                <button class="interest-btn" data-action="up">Up</button>
+                <button class="interest-btn" data-action="down">Down</button>
+                <button class="star-btn" data-star="{{ post.idea_star }}">Star</button>
+            </div>
+        {% endfor %}
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const updateInterestUrl = "{% url 'posts:update_interest' %}";
+        const updateIdeaStarUrl = "{% url 'posts:update_idea_star' %}";
+        const csrfToken = '{{ csrf_token }}';
+
+        const buttons = document.querySelectorAll('.interest-btn');
+        buttons.forEach(button => {
+            button.addEventListener('click', function () {
+                const postItem = this.closest('.post-item');
+                const postId = postItem.getAttribute('data-post-id');
+                const action = this.getAttribute('data-action');
+
+                fetch(updateInterestUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'X-CSRFToken': csrfToken
+                    },
+                    body: new URLSearchParams({
+                        'post_id': postId,
+                        'action': action
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.interest !== undefined) {
+                        postItem.querySelector('.interest-value').textContent = data.interest;
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+            });
+        });
+
+        const starButtons = document.querySelectorAll('.star-btn');
+        starButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                const postItem = this.closest('.post-item');
+                const postId = postItem.getAttribute('data-post-id');
+
+                fetch(updateIdeaStarUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'X-CSRFToken': csrfToken
+                    },
+                    body: new URLSearchParams({
+                        'post_id': postId
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.idea_star !== undefined) {
+                        this.textContent = data.idea_star ? 'Unstar' : 'Star';
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+            });
+        });
+    });
+    </script>
+</body>
+</html>

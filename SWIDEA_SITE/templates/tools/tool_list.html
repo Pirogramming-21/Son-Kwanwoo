@@ -1,0 +1,54 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tool List</title>
+    <link rel="stylesheet" href="{% static 'css/tools/tool_list.css' %}">
+</head>
+<body>
+    <div class="header">
+        <h1 class="site-title"><a href="{% url 'posts:main' %}">Post List</a></h1>
+    
+        <div class="header-right">
+            <div class="search-bar">
+                <input type="text" placeholder="Search">
+            </div>
+    
+            <div class="action-buttons">
+                <a href="{% url 'posts:create' %}">Create New Post</a>
+                <a href="{% url 'tools:create' %}">Create New Tool</a>
+                <a href="{% url 'tools:list' %}">View Tool List</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <h1>Tool List</h1>
+
+        <div class="search-bar">
+            <input type="text" placeholder="Search">
+        </div>
+
+        <div class="action-buttons">
+            <a href="{% url 'tools:create' %}">Add New Tool</a>
+        </div>
+
+        <div class="tool-list">
+            {% for tool in tools %}
+                <div class="tool-item">
+                    <span class="tool-name">
+                        <a href="{% url 'tools:detail' tool.pk %}">{{ tool.name }}</a>
+                    </span>
+                    <span class="tool-type">{{ tool.type }}</span>
+                    <span class="tool-actions">
+                        <a href="{% url 'tools:update' tool.pk %}">Edit</a>
+                        <a href="{% url 'tools:delete' tool.pk %}">Delete</a>
+                    </span>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

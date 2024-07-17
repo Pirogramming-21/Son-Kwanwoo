@@ -1,0 +1,59 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="{% static 'css//posts/post_detail.css' %}">
+    <title>{{ post.title }}</title>
+</head>
+
+<body>
+    <div class="header">
+        <h1 class="site-title"><a href="{% url 'posts:main' %}">My SW Idea Manage💻</a></h1>
+    
+        <div class="header-right">
+            <div class="search-bar">
+                <input type="text" placeholder="Search">
+            </div>
+    
+            <div class="action-buttons">
+                <a href="{% url 'posts:create' %}">Idea Register</a>
+                <a href="{% url 'tools:create' %}">DevTool Register</a>
+                <a href="{% url 'tools:list' %}">DevTool List</a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container">
+        <h1>{{ post.title }}</h1>
+    
+        <div class="post-content">
+            {{ post.content }}
+        </div>
+    
+        <div class="post-info">
+            <p>Interest: {{ post.interest }}</p>
+            <p>Tool: <a href="{% url 'tools:detail' post.tool.pk %}">{{ post.tool.name }}</a></p>
+        </div>
+    
+        {% if post.image %}
+            <img class="post-image" src="{{ post.image.url }}" alt="{{ post.title }}">
+        {% endif %}
+    
+        <div class="action-buttons">
+            <a href="{% url 'posts:update' post.pk %}">Edit</a>
+            <a href="{% url 'posts:delete' post.pk %}">Delete</a>
+            <a href="{% url 'posts:main' %}">Back to List</a>
+        </div>
+    
+        <div class="related-posts">
+            <h2>Related Posts</h2>
+            <ul>
+                {% for related_post in related_posts %}
+                    <li><a href="{% url 'posts:detail' related_post.pk %}">{{ related_post.title }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

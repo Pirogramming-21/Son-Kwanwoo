@@ -44,6 +44,7 @@
             <a href="{% url 'posts:update' post.pk %}">Edit</a>
             <a href="{% url 'posts:delete' post.pk %}">Delete</a>
             <a href="{% url 'posts:main' %}">Back to List</a>
+            <button class="star-btn">{{ post.idea_star|yesno:"Unstar,Star" }}</button> <!-- 추가된 부분 -->
         </div>
     
         <div class="related-posts">
@@ -55,5 +56,37 @@
             </ul>
         </div>
     </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const updateIdeaStarUrl = "{% url 'posts:update_idea_star' %}";
+        const csrfToken = '{{ csrf_token }}';
+        const starButton = document.querySelector('.star-btn');
+
+        starButton.addEventListener('click', function () {
+            const postId = '{{ post.id }}';
+
+            fetch(updateIdeaStarUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'X-CSRFToken': csrfToken
+                },
+                body: new URLSearchParams({
+                    'post_id': postId
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.idea_star !== undefined) {
+                    starButton.textContent = data.idea_star ? 'Unstar' : 'Star';
+                } else {
+                    console.error('IdeaStar value is undefined:', data);
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        });
+    });
+    </script>
 </body>
 </html>

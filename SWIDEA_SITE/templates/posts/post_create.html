@@ -9,30 +9,42 @@
 
 <body>
     <div class="header">
-        <h1 class="site-title"><a href="{% url 'posts:main' %}">Post List</a></h1>
-    
+        <h1 class="site-title"><a href="{% url 'posts:main' %}">My SW Idea Manage💻</a></h1>
         <div class="header-right">
             <div class="search-bar">
-                <input type="text" placeholder="Search">
+                <input type="text" placeholder="Search...">
             </div>
-    
             <div class="action-buttons">
-                <a href="{% url 'posts:create' %}">Create New Post</a>
-                <a href="{% url 'tools:create' %}">Create New Tool</a>
-                <a href="{% url 'tools:list' %}">View Tool List</a>
+                <a href="{% url 'posts:create' %}">Idea Register</a>
+                <a href="{% url 'tools:create' %}">DevTool Register</a>
+                <a href="{% url 'tools:list' %}">DevTool List</a>
             </div>
         </div>
     </div>
     
     <div class="container">
-        <h1>Create Post</h1>
-
+        <h2>Create Post</h2>
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
-            {{ form.as_p }}
+            {{ form.non_field_errors }}
+            {% for field in form %}
+                <div class="form-group">
+                    {{ field.label_tag }}
+                    {% if field.name == 'tool' %}
+                        <select name="{{ field.name }}" id="{{ field.id_for_label }}">
+                            {% for choice in field.field.queryset %}
+                                <option value="{{ choice.pk }}">{{ choice.name }}</option>
+                            {% endfor %}
+                        </select>
+                    {% else %}
+                        {{ field }}
+                    {% endif %}
+                    {{ field.errors }}
+                </div>
+            {% endfor %}
             <div class="button-group">
                 <button type="submit">Save</button>
-                <a href="{% url 'posts:main' %}">Cancel</a>
+                <a href="{% url 'posts:main' %}" class="cancel-btn">Cancel</a>
             </div>
         </form>
     </div>

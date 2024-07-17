@@ -5,37 +5,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ tool.name }}</title>
+    <link rel="stylesheet" href="{% static 'css/tools/common.css' %}">
     <link rel="stylesheet" href="{% static 'css/tools/tool_detail.css' %}">
 </head>
 <body>
     <div class="header">
-        <h1 class="site-title"><a href="{% url 'posts:main' %}">Post List</a></h1>
-    
+        <h1 class="site-title"><a href="{% url 'posts:main' %}">My SW Idea Manage💻</a></h1>
         <div class="header-right">
             <div class="search-bar">
-                <input type="text" placeholder="Search">
+                <input type="text" placeholder="Search...">
             </div>
-    
             <div class="action-buttons">
-                <a href="{% url 'posts:create' %}">Create New Post</a>
-                <a href="{% url 'tools:create' %}">Create New Tool</a>
-                <a href="{% url 'tools:list' %}">View Tool List</a>
+                <a href="{% url 'posts:create' %}">Idea Register</a>
+                <a href="{% url 'tools:create' %}">DevTool Register</a>
+                <a href="{% url 'tools:list' %}">DevTool List</a>
             </div>
         </div>
     </div>
 
     <div class="container">
-        <h1>{{ tool.name }}</h1>
-
+        <h2>{{ tool.name }}</h2>
         <div class="tool-info">
             <p><strong>Type:</strong> {{ tool.type }}</p>
             <p><strong>Description:</strong> {{ tool.description }}</p>
         </div>
-
         <div class="action-buttons">
-            <a href="{% url 'tools:update' tool.pk %}">Edit</a>
-            <a href="{% url 'tools:delete' tool.pk %}">Delete</a>
-            <a href="{% url 'tools:list' %}">Back to List</a>
+            <a href="{% url 'tools:update' tool.pk %}" class="edit-btn">Edit</a>
+            <a href="{% url 'tools:delete' tool.pk %}" class="delete-btn">Delete</a>
+            <a href="{% url 'tools:list' %}" class="back-btn">Back to List</a>
         </div>
     </div>
 </body>

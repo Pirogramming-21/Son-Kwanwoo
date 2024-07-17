@@ -1,10 +1,26 @@
+/* 공통 스타일 */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* 헤더 스타일 */
 .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 20px;
-    background-color: #f8f9fa;
-    border-bottom: 1px solid #e7e7e7;
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .site-title {
@@ -14,7 +30,8 @@
 
 .site-title a {
     text-decoration: none;
-    color: #343a40;
+    color: #333;
+    font-weight: bold;
 }
 
 .header-right {
@@ -22,105 +39,97 @@
     align-items: center;
 }
 
-.search-bar {
-    margin-right: 20px;
-}
-
 .search-bar input {
-    padding: 5px;
-    border: 1px solid #ced4da;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
     border-radius: 4px;
+    font-size: 14px;
 }
 
 .action-buttons a {
-    margin-left: 10px;
+    margin-left: 15px;
     text-decoration: none;
     color: #007bff;
-    padding: 5px 10px;
-    border: 1px solid #007bff;
-    border-radius: 4px;
-    transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+    font-weight: bold;
+    font-size: 14px;
+    transition: color 0.3s;
 }
 
 .action-buttons a:hover {
-    background-color: #007bff;
-    color: #fff;
-    border-color: #0056b3;
-    text-decoration: none;
-}
-/* 여기까지 헤더 공통부분 */
-
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
-    margin: 0;
-    padding: 0;
+    color: #0056b3;
 }
 
 .container {
-    max-width: 800px;
-    margin: 0 auto;
+    max-width: 600px;
+    margin: 20px auto;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     padding: 20px;
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
-h1 {
-    text-align: center;
+h2 {
+    font-size: 24px;
     color: #333;
+    margin-bottom: 20px;
 }
 
-form {
-    display: flex;
-    flex-direction: column;
+.form-group {
+    margin-bottom: 20px;
 }
 
-form p {
-    margin-bottom: 15px;
-}
-
-form label {
-    font-weight: bold;
-    margin-bottom: 5px;
+label {
     display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
 }
 
-form input[type="text"],
-form textarea,
-form select {
+input[type="text"],
+input[type="number"],
+textarea,
+select {
     width: 100%;
-    padding: 10px;
+    padding: 8px;
     border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 16px;
+    border-radius: 4px;
+    font-size: 14px;
 }
 
-form textarea {
+textarea {
     height: 150px;
 }
 
 .button-group {
     display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
+    justify-content: flex-start;
 }
 
-button, a {
-    padding: 10px 20px;
+button[type="submit"],
+.cancel-btn {
+    padding: 8px 16px;
     border: none;
-    border-radius: 5px;
-    font-size: 16px;
+    border-radius: 4px;
     cursor: pointer;
-    text-decoration: none;
+    font-size: 14px;
+    transition: background-color 0.3s;
 }
 
 button[type="submit"] {
-    background-color: #28a745;
-    color: white;
+    background-color: #007bff;
+    color: #ffffff;
+    margin-right: 10px;
 }
 
-a {
-    background-color: #dc3545;
-    color: white;
+button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+.cancel-btn {
+    background-color: #f0f0f0;
+    color: #333;
+    text-decoration: none;
+}
+
+.cancel-btn:hover {
+    background-color: #e0e0e0;
 }

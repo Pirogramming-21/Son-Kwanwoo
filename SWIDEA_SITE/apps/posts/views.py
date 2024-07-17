@@ -25,7 +25,7 @@ def post_create(req):
     form = PostForm(req.POST, req.FILES)
     if form.is_valid():
         post = form.save()
-        return redirect('posts:detail', pk=post.pk)  # 네임스페이스와 URL 패턴 이름 확인
+        return redirect('posts:detail', pk=post.pk)
 
     context = {'form': form}
     return render(req, 'posts/post_create.html', context)
@@ -46,13 +46,13 @@ def post_update(req, pk):
     post = get_object_or_404(Posts, pk=pk)
     if req.method == "GET":
         form = PostForm(instance=post)
-        context = {'form': form, 'post': post}  # 'post'를 추가하여 템플릿에서 사용할 수 있게 함
+        context = {'form': form, 'post': post}
         return render(req, 'posts/post_update.html', context)
 
     form = PostForm(req.POST, req.FILES, instance=post)
     if form.is_valid():
         form.save()
-        return redirect('posts:detail', pk=post.pk)  # 네임스페이스와 URL 패턴 이름 확인
+        return redirect('posts:detail', pk=post.pk)
 
     context = {'form': form, 'post': post}
     return render(req, 'posts/post_update.html', context)

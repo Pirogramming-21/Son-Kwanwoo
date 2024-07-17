@@ -5,34 +5,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Tool</title>
+    <link rel="stylesheet" href="{% static 'css/tools/common.css' %}">
     <link rel="stylesheet" href="{% static 'css/tools/tool_update.css' %}">
 </head>
 <body>
     <div class="header">
-        <h1 class="site-title"><a href="{% url 'posts:main' %}">Post List</a></h1>
-    
+        <h1 class="site-title"><a href="{% url 'posts:main' %}">My SW Idea Manage💻</a></h1>
         <div class="header-right">
             <div class="search-bar">
-                <input type="text" placeholder="Search">
+                <input type="text" placeholder="Search...">
             </div>
-    
             <div class="action-buttons">
-                <a href="{% url 'posts:create' %}">Create New Post</a>
-                <a href="{% url 'tools:create' %}">Create New Tool</a>
-                <a href="{% url 'tools:list' %}">View Tool List</a>
+                <a href="{% url 'posts:create' %}">Idea Register</a>
+                <a href="{% url 'tools:create' %}">DevTool Register</a>
+                <a href="{% url 'tools:list' %}">DevTool List</a>
             </div>
         </div>
     </div>
 
     <div class="container">
-        <h1>Edit Tool</h1>
-
+        <h2>Edit Tool</h2>
         <form method="post">
             {% csrf_token %}
             {{ form.as_p }}
             <div class="button-group">
                 <button type="submit">Save</button>
-                <a href="{% url 'tools:list' %}">Cancel</a>
+                <a href="{% url 'tools:list' %}" class="cancel-btn">Cancel</a>
             </div>
         </form>
     </div>

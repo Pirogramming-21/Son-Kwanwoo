@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="{% static 'css/posts/post_list.css' %}">
     <title>Post List</title>
 </head>
+
 <body>
     <div class="header">
         <h1 class="site-title"><a href="{% url 'posts:main' %}">My SW Idea Manage💻</a></h1>
@@ -34,7 +35,7 @@
                 <p>Interest: <span class="interest-value">{{ post.interest }}</span></p>
                 <button class="interest-btn" data-action="up">Up</button>
                 <button class="interest-btn" data-action="down">Down</button>
-                <button class="star-btn" data-star="{{ post.idea_star }}">Star</button>
+                <button class="star-btn">{{ post.idea_star|yesno:"Unstar,Star" }}</button>
             </div>
         {% endfor %}
     </div>
@@ -67,6 +68,8 @@
                 .then(data => {
                     if (data.interest !== undefined) {
                         postItem.querySelector('.interest-value').textContent = data.interest;
+                    } else {
+                        console.error('Interest value is undefined:', data);
                     }
                 })
                 .catch(error => console.error('Error:', error));
@@ -93,6 +96,8 @@
                 .then(data => {
                     if (data.idea_star !== undefined) {
                         this.textContent = data.idea_star ? 'Unstar' : 'Star';
+                    } else {
+                        console.error('IdeaStar value is undefined:', data);
                     }
                 })
                 .catch(error => console.error('Error:', error));

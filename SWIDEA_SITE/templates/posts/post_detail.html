@@ -44,11 +44,11 @@
             <a href="{% url 'posts:update' post.pk %}">Edit</a>
             <a href="{% url 'posts:delete' post.pk %}">Delete</a>
             <a href="{% url 'posts:main' %}">Back to List</a>
-            <button class="star-btn">{{ post.idea_star|yesno:"Unstar,Star" }}</button> <!-- 추가된 부분 -->
+            <button class="star-btn">{{ post.idea_star|yesno:"Unstar,Star" }}</button>
         </div>
     
         <div class="related-posts">
-            <h2>Related Posts</h2>
+            <h2>Related Idea</h2>
             <ul>
                 {% for related_post in related_posts %}
                     <li><a href="{% url 'posts:detail' related_post.pk %}">{{ related_post.title }}</a></li>

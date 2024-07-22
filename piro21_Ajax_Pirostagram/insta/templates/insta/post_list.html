@@ -1,0 +1,110 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>pirostagram</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+    <div id="post" class="post">
+        <img src="{% static 'image.png' %}" alt="게시물 이미지" class="post-image">
+        <div id="like-section" class="like-section">
+            <button id="like-btn" onclick="likePost()">좋아요</button>
+            <span id="like-count">{{ post.like }}</span>
+        </div>
+
+        <div id="comments" class="comments">
+            {% for comment in post.comment.splitlines %}
+            {% if comment %}
+            <div class="comment">
+                <span class="comment-text">{{ comment }}</span>
+                <span class="delete-btn" onclick="deleteComment('{{ comment }}')">삭제</span>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+        
+        <form id="comment-form" class="comment-form" onsubmit="submitComment(event)">
+            <input type="text" id="comment-input" class="comment-input" placeholder="댓글을 입력하세요...">
+            <button type="submit" class="submit-btn">게시</button>
+        </form>
+    </div>
+
+    <script>
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+        const csrftoken = getCookie('csrftoken');
+
+        function likePost() {
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '{% url "insta:like_ajax" %}', true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.setRequestHeader('X-CSRFToken', csrftoken);
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    var response = JSON.parse(xhr.responseText);
+                    document.getElementById('like-count').textContent = response.like;
+                }
+            };
+            xhr.send(JSON.stringify({post_id: 1}));
+        }
+
+        function submitComment(event) {
+            event.preventDefault();
+            var commentInput = document.getElementById('comment-input');
+            var comment = commentInput.value.trim();
+            if (comment) {
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', '{% url "insta:comment_ajax" %}', true);
+                xhr.setRequestHeader('Content-Type', 'application/json');
+                xhr.setRequestHeader('X-CSRFToken', csrftoken);
+                xhr.onload = function() {
+                    if (xhr.status === 200) {
+                        var response = JSON.parse(xhr.responseText);
+                        addCommentToDOM(comment);
+                        commentInput.value = '';
+                    }
+                };
+                xhr.send(JSON.stringify({comment: comment}));
+            }
+        }
+
+        function addCommentToDOM(comment) {
+            var commentsContainer = document.getElementById('comments');
+            var commentElement = document.createElement('div');
+            commentElement.className = 'comment';
+            commentElement.innerHTML = `<span class="comment-text">${comment}</span> <span class="delete-btn" onclick="deleteComment('${comment}')">삭제</span>`;
+            commentsContainer.appendChild(commentElement);
+        }
+
+        function deleteComment(comment) {
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '{% url "insta:delete_comment_ajax" %}', true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.setRequestHeader('X-CSRFToken', csrftoken);
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    location.reload();
+                }
+            };
+            xhr.send(JSON.stringify({comment: comment}));
+        }
+    </script>
+</body>
+</html>
